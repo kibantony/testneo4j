@@ -1,0 +1,8 @@
+error:
+  stackTrace: ALWAYS
+  exception: true
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
