@@ -58,17 +58,19 @@ public class WidgetRepositoryTest {
     }
 
     @Test
-    public void createWidgetHappyPath() {
-        Widget widget = new Widget().setEvents(Arrays.asList(
-                new WidgetEvent().setTag("one").setValues(Arrays.asList(
-                        new EventValue().setValue("foo"),
-                        new EventValue().setValue("bar")
-                )),
-                new WidgetEvent().setTag("two").setValues(Arrays.asList(
-                        new EventValue().setValue("goo"),
-                        new EventValue().setValue("car")
-                ))
-        ));
+    public void testWidgets() {
+        Widget widget = new Widget()
+                .setTag("tag")
+                .setEvents(Arrays.asList(
+                        new WidgetEvent().setTag("one").setValues(Arrays.asList(
+                                new EventValue().setValue("foo"),
+                                new EventValue().setValue("bar")
+                        )),
+                        new WidgetEvent().setTag("two").setValues(Arrays.asList(
+                                new EventValue().setValue("goo"),
+                                new EventValue().setValue("car")
+                        ))
+                ));
 
         StepVerifier.create(repository.save(widget))
                 .assertNext(saved -> {
