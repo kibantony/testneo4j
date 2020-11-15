@@ -61,16 +61,19 @@ public class WidgetRepositoryTest {
     public void createWidgetHappyPath() {
         Widget widget = new Widget().setEvents(Arrays.asList(
                 new WidgetEvent().setTag("one").setValues(Arrays.asList(
-                        new EventValue().setValue("foo"), new EventValue().setValue("bar"))
-                ),
+                        new EventValue().setValue("foo"),
+                        new EventValue().setValue("bar")
+                )),
                 new WidgetEvent().setTag("two").setValues(Arrays.asList(
-                        new EventValue().setValue("goo"), new EventValue().setValue("car"))
-                )
+                        new EventValue().setValue("goo"),
+                        new EventValue().setValue("car")
+                ))
         ));
 
         StepVerifier.create(repository.save(widget))
                 .assertNext(saved -> {
-                    assertThat(saved.getEvents()).hasSize(widget.getEvents().size());
+                    assertThat(saved.getEvents())
+                            .hasSize(widget.getEvents().size());
                     assertThat(saved.getEvents().get(0).getValues())
                             .hasSize(widget.getEvents().get(0).getValues().size());
                     assertThat(saved.getEvents().get(1).getValues())
@@ -80,7 +83,8 @@ public class WidgetRepositoryTest {
 
         StepVerifier.create(repository.findById(widget.getUuid()))
                 .assertNext(actual -> {
-                    assertThat(actual.getEvents()).hasSize(widget.getEvents().size());
+                    assertThat(actual.getEvents())
+                            .hasSize(widget.getEvents().size());
                     assertThat(actual.getEvents().get(0).getValues())
                             .hasSize(widget.getEvents().get(0).getValues().size());
                     assertThat(actual.getEvents().get(1).getValues())
